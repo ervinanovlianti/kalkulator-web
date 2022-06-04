@@ -53,10 +53,10 @@ function performCalculation() {
     let result = 0;
     if (calculator.operator === "+") {
         result = parseInt(calculator.firstNumber) + parseInt(calculator.displayNumber);
-    }else{
+    } else {
         result = parseInt(calculator.firstNumber) - parseInt(calculator.displayNumber)
     }
-    calculator.displayNumber= result;
+    calculator.displayNumber = result;
 }
 
 const buttons = document.querySelectorAll(".button");
@@ -87,4 +87,35 @@ for (let button of buttons) {
         inputDigit(target.innerText);
         updateDisplay();
     })
+}
+const history = {
+    firstNumber: calculator.firstNumber,
+    secondNumber: calculator.displayNumber,
+    operator: calculator.operator,
+    result: result
+}
+
+function performCalculation() {
+    if (calculator.firstNumber == null || calculator.operator == null) {
+        alert("Anda belum menetapkan operator");
+        return;
+    }
+
+    let result = 0;
+    if (calculator.operator === "+") {
+        result = parseInt(calculator.firstNumber) + parseInt(calculator.displayNumber);
+    } else {
+        result = parseInt(calculator.firstNumber) - parseInt(calculator.displayNumber)
+    }
+
+    // objek yang akan dikirimkan sebagai argumen fungsi putHistory()
+    const history = {
+        firstNumber: calculator.firstNumber,
+        secondNumber: calculator.displayNumber,
+        operator: calculator.operator,
+        result: result
+    }
+    putHistory(history);
+    calculator.displayNumber = result;
+    renderHistory();
 }
